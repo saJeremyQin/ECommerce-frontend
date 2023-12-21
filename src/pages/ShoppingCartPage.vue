@@ -1,10 +1,9 @@
 <template>
     <h1>Shopping Cart</h1>
-    <ShoppingCartList :cartItems="cartItems"/>
+    <ShoppingCartList :products="cartItems"/>
 </template>
 
 <script setup>
 import ShoppingCartList from '@/components/ShoppingCartList.vue';
-// import { cartItems } from '@/temp-data';
-const cartItems = [];
+import { cartItems } from '@/temp-data';
 </script>

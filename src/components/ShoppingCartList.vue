@@ -1,8 +1,8 @@
 <template>
-    <div v-if="cartItems.length > 0">
+    <div v-if="products.length > 0">
         <div 
             class="product-container"
-            v-for="product in props.cartItems"
+            v-for="product in products"
             :key="product.id"
         >
             <img class="product-image" :src="product.imageName" />
@@ -21,11 +21,11 @@
 
 <script setup>
 import { defineProps } from 'vue';
-// defineProps(['cartItems']);
-const props = defineProps({
-    cartItems: {
-        type: Array,
-        required: true
-    }
-})
+defineProps(['products']);
+// const props = defineProps({
+//     cartItems: {
+//         type: Array,
+//         required: true
+//     }
+// })
 </script>
