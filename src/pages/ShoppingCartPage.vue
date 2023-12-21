@@ -1,6 +1,12 @@
 <template>
     <h1>Shopping Cart</h1>
-    <ShoppingCartList :products="cartItems"/>
+    <div v-if="cartItems.length > 0">
+        <ShoppingCartList :products="cartItems"/>
+        <button class="checkout-button">Proceed to Checkout</button>
+    </div>
+    <div v-else>
+        You have no items in your cart yet.
+    </div>
 </template>
 
 <script setup>
