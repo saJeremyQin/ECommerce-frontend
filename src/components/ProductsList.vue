@@ -2,7 +2,7 @@
   <div class="grid-wrap">
         <div 
             class="product-item"
-            v-for="product in products"
+            v-for="product in props.products"
             :key="product.id"
         >
             <img :src="product.imageName" />
@@ -18,7 +18,10 @@
 <script setup>
 import { defineProps } from 'vue';
 
-defineProps([
-    'products'
-]);
+const props = defineProps({
+    products: {
+        type: Array,
+        required: true,
+    }
+});
 </script>
