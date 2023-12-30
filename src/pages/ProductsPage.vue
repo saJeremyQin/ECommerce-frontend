@@ -13,15 +13,8 @@ onMounted(async () => {
     try {
         const response =  await axios.get('/api/products');
         products.value = response.data;   
-
     } catch (error) {
-        if(error.response) {
-            console.error('Server responded with an error:', error.response.status);
-        } else if(error.request) {
-            console.error('No response received from the server');
-        } else {
-            console.error('Error in request setup:', error.message);
-        }
+        console.log(error.message);
     }
 })
 
