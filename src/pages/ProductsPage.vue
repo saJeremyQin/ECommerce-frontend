@@ -4,7 +4,6 @@
 </template>
 
 <script setup>
-// import { products } from '@/temp-data';
 import { onMounted, ref } from 'vue';
 import axios from 'axios';
 
