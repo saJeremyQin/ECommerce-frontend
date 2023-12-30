@@ -10,6 +10,14 @@
 </template>
 
 <script setup>
+import { onMounted, ref } from 'vue';
+import axios from 'axios';
 import ShoppingCartList from '@/components/ShoppingCartList.vue';
-import { cartItems } from '@/temp-data';
+const cartItems = ref([]);
+
+onMounted(async () => {
+    const response = await axios.get('/api/users/12345/cart');
+    cartItems.value = response.data;
+})
+
 </script>
