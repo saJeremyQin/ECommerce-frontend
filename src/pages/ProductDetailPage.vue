@@ -6,7 +6,14 @@
         <div class="product-details">
             <h1>{{ product.name }}</h1>
             <h3 class="price">{{ product.price }}</h3>
-            <button class="add-to-cart" @click="addToCart">Add to Cart</button>
+            <button 
+                :disabled="itemsInCart"
+                :class="{'grey-button': itemsInCart}"
+                class="add-to-cart" 
+                @click="addToCart"
+            >
+                {{ itemsInCart ? 'Items already exist' : 'Add to Cart'}}
+            </button>
         </div>
     </div>
     <div v-else>
@@ -18,11 +25,17 @@
 <script setup>
 import router from '@/router';
 import axios from 'axios';
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import NotFoundPage from './NotFoundPage.vue';
 
 const product = ref();
+const cartItems = ref([]);
+
+const itemsInCart = computed(() => {
+    const productId = product.value.id;
+    return cartItems.value.some(item => item.id === productId);
+})
 const route = useRoute();
 
 const addToCart = async () => {
@@ -39,7 +52,10 @@ const addToCart = async () => {
 
 onMounted(async() => {
     const productId = route.params.productId;
-    const response = await axios.get(`/api/products/${productId}`);
+    let response = await axios.get(`/api/products/${productId}`);
     product.value = response.data;
+
+    const cartResponse = await axios.get('/api/users/12345/cart');
+    cartItems.value = cartResponse.data;
 })
 </script>
